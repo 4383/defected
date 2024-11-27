@@ -80,6 +80,8 @@ $ defected -h
 
 ### Available Commands
 
+#### Analyze
+
 The `analyze` sub-command help you to find suspicious contributors:
 ```bash
 $ defected analyze [OPTIONS]
@@ -90,7 +92,7 @@ List all the available options by using:
 $ defected analyze -h
 ```
 
-## Examples
+##### Examples
 
 Analyze the current repository for timezone changes:
 
@@ -112,9 +114,9 @@ contributors flagged as suspicious:
 defected analyze --only-suspicious
 ```
 
-## Example Output
+##### Examples Output
 
-### Terminal Output
+Terminal output:
 ```
 Extracting Git logs...
 150 commits extracted.
@@ -130,18 +132,100 @@ Saving analysis to 'timezone_analysis.csv'...
 Analysis saved.
 ```
 
-### CSV Output
-
+Or CSV output:
 | author       | email             | total_commits | unique_timezones | timezone_changes | suspicious |
 |--------------|-------------------|---------------|-------------------|------------------|------------|
 | Alice Smith  | alice@example.com | 45            | 3                 | 4                | True       |
 | Bob Johnson  | bob@example.com   | 30            | 2                 | 3                | True       |
 
+#### `inspect` Command
+
+The `inspect` command in **Defected** allows maintainers to analyze the
+activity of a specific contributor by filtering their Git commits and
+providing detailed information. It helps investigate anomalies by summarizing
+timezone usage and generating a timeline of timezone changes.
+
+This command can be used in addition of the `analyze` command to collect
+more details once a suspicious activity has been detected.
+
+The `inspect` command is designed for deeper investigation into an individual
+contributor's activity. It provides:
+1. A detailed breakdown of the time zones from which the contributor worked.
+2. A timeline of timezone changes with timestamps, highlighting irregular
+   patterns.
+
+##### Usage
+
+```bash
+defected inspect [OPTIONS]
+```
+
+Inspect by user name. Analyze all contributions made by a user named
+"Alice Smith" in the current repository:
+
+```bash
+defected inspect --user "Alice Smith"
+```
+
+Inspect by email. Analyze all contributions made by a contributor with the
+email `alice@example.com`:
+
+```bash
+defected inspect --email alice@example.com
+```
+
+Analyze a remote repository. Clone and analyze a remote repository while
+inspecting a specific user:
+
+```bash
+defected inspect --repo https://github.com/example/repo.git --user "Alice Smith"
+```
+
+##### Output
+
+The `inspect` command generates two primary outputs:
+
+1. **Timezone Usage Summary**:
+   - A table summarizing the time zones used by the contributor and the number
+     of commits per time zone.
+   - Saved to `<output>_usage.csv`.
+
+2. **Timezone Change Log**:
+   - A detailed timeline of timezone changes, showing the date and time of
+     each change and the time zones involved.
+   - Saved to `<output>_changes.csv`.
+
+##### Examples
+
+```text
+Commits found for Alice Smith: 50
+
+Timezone usage:
+  timezone  commit_count
+0    +0100            20
+1    -0500            15
+2    +0200            10
+3    +0000             5
+
+Timezone change log:
+From +0100 at 2024-11-27 13:00:00 to +0200 at 2024-11-28 14:00:00
+From +0200 at 2024-11-28 14:00:00 to -0500 at 2024-11-29 15:30:00
+From -0500 at 2024-11-29 15:30:00 to +0000 at 2024-11-30 10:00:00
+
+Detailed results saved to 'inspect_results_usage.csv' and 'inspect_results_changes.csv'.
+```
+
+##### Benefits
+
+- **Targeted Analysis**: Focus on individual contributors for detailed investigations.
+- **Actionable Insights**: Identify unusual patterns, such as frequent timezone changes.
+- **Exportable Data**: Provides structured data for further analysis and reporting.
+
 ## Real world use case
 
 [JiaT75](https://github.com/JiaT75) and the [xz Backdoor](https://en.wikipedia.org/wiki/XZ_Utils_backdoor)
 
-### **Background**
+### Background
 
 In February 2024, a contributor named **[JiaT75](https://github.com/JiaT75)**
 managed to introduce a backdoor into the popular compression utility **xz**.
@@ -156,7 +240,7 @@ Upon investigation, it was discovered that **JiaT75** exhibited **suspicious beh
 
 Defected can help identify such patterns in contributors' Git activity.
 
-### **Detecting JiaT75's Behavior with Defected**
+### Detecting JiaT75's Behavior with Defected
 
 Suppose you have a repository of **xz** and suspect malicious activity. You
 can use **Defected** to analyze the commit logs for anomalies.
@@ -168,6 +252,7 @@ defected analyze --repo https://github.com/tukaani-project/xz --only-suspicious
 
 This command output something like the following:
 ```
+$ defected analyze --repo https://github.com/tukaani-project/xz --only-suspicious
 Cloning remote repository: https://github.com/tukaani-project/xz...
 Extracting Git logs...
 2676 commits extracted.
@@ -191,6 +276,44 @@ Results are exported at the CSV format and can be loaded in sheet:
 | Lasse Collin    | 2102          | 3                 | 36               | True       | lasse.collin@tukaani.org  |
 | Jia Tan         | 449           | 3                 | 14               | True       | jiat0218@gmail.com        |
 | Jonathan Nieder | 9             | 3                 | 4                | True       | jrnieder@gmail.com        |
+
+If we continue our investigation with the `inspect` command, we can found
+more useful details:
+
+```
+$ defected inspect --repo https://github.com/tukaani-project/xz --user "Jia Tan"
+Commits found for Jia Tan: 450
+
+Timezone usage:
+  timezone  commit_count
+0    +0800           441
+1    +0300             6
+2    +0200             3
+
+Timezone change log:
+From +0800 at 2022-06-13 20:27:03 to +0300 at 2022-06-16 17:32:19
+From +0300 at 2022-06-16 17:32:19 to +0800 at 2022-07-01 21:19:26
+From +0800 at 2022-07-01 21:19:26 to +0300 at 2022-07-25 18:20:01
+From +0300 at 2022-07-25 18:30:05 to +0800 at 2022-08-17 17:59:51
+From +0800 at 2022-09-02 20:18:55 to +0300 at 2022-09-08 15:07:00
+From +0300 at 2022-09-08 15:07:00 to +0800 at 2022-09-21 16:15:50
+From +0800 at 2022-10-06 17:00:38 to +0300 at 2022-10-06 21:53:09
+From +0300 at 2022-10-06 21:53:09 to +0800 at 2022-10-23 21:01:08
+From +0800 at 2022-10-23 21:01:08 to +0200 at 2022-11-07 16:24:14
+From +0200 at 2022-11-07 16:24:14 to +0800 at 2022-11-19 23:18:04
+From +0800 at 2023-06-20 20:32:59 to +0300 at 2023-06-27 17:27:09
+From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32
+From +0800 at 2024-02-09 23:59:54 to +0200 at 2024-02-12 17:09:10
+From +0200 at 2024-02-12 17:09:10 to +0800 at 2024-02-13 01:53:33
+```
+
+We can clearly observe that "Jia Tan" traveled at the speed of the light:
+```
+From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32
+```
+
+Moving from Eastern Europe to Asia in a snap of the fingers.
+
 
 ### Interpretation
 
@@ -228,6 +351,10 @@ but like demonstrated by xz example some are real attempts. **JiaT75** tried
 to show that he was located in Asia where some timezone changes reflect
 western Europe timezone. Some timezone changes are so short that **JiaT75**
 travel faster than light.
+
+**We should notice that it is now easy to understand the whole story after the
+fact. We don't want to incriminate anyone. We simply want to highligh such
+kind of social engineering to try to avoid in the future.**
 
 ## How It Works
 
