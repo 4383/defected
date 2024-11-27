@@ -278,7 +278,7 @@ Results are exported at the CSV format and can be loaded in sheet:
 | Jonathan Nieder | 9             | 3                 | 4                | True       | jrnieder@gmail.com        |
 
 If we continue our investigation with the `inspect` command, we can found
-more useful details:
+more useful details about Jia Tan:
 
 ```
 $ defected inspect --repo https://github.com/tukaani-project/xz --user "Jia Tan"
