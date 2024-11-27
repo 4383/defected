@@ -1,6 +1,6 @@
 # defected
 
-![Build](https://github.com/4383/defected/actions/workflows/python-app.yml/badge.svg)
+![Build](https://github.com/4383/defected/actions/workflows/main.yml/badge.svg)
 ![PyPI](https://img.shields.io/pypi/v/defected.svg)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/defected.svg)
 ![PyPI - Status](https://img.shields.io/pypi/status/defected.svg)
