@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import pandas as pd
 
-from defected.cmds.analyze import analyze_timezones, extract_git_logs, parse_logs
+from defected.api import analyze_timezones, extract_git_logs, parse_logs
 
 
 class TestDefected(unittest.TestCase):

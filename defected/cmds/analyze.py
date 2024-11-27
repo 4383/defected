@@ -10,6 +10,8 @@ from datetime import datetime
 
 import pandas as pd
 
+import defected.api as dapi
+
 logger = logging.getLogger(__name__)
 
 command_description = """
@@ -56,130 +58,26 @@ def add_arguments(parser):
     )
 
 
-def extract_git_logs(repo_path):
-    """
-    Extract Git logs with author, email, date, and timezone information from the specified repository.
-    """
-    # Extract logs with %ad containing date, time, and timezone
-    cmd = ["git", "-C", repo_path, "log", "--pretty=format:%an|%ae|%ad", "--date=iso"]
-    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    logs = result.stdout.splitlines()
-
-    # Process logs to extract time zone
-    processed_logs = []
-    for log in logs:
-        try:
-            author, email, date_time = log.split("|")
-            date_parts = date_time.strip().rsplit(
-                " ", 1
-            )  # Split date_time by the last space
-            date = date_parts[0]  # Extract the date and time
-            timezone = (
-                date_parts[1] if len(date_parts) > 1 else "UNKNOWN"
-            )  # Extract the timezone
-            processed_logs.append(f"{author}|{email}|{date}|{timezone}")
-        except ValueError:
-            continue  # Skip malformed logs
-    return processed_logs
-
-
-def parse_logs(logs, include_email=True):
-    """
-    Parse Git logs to extract relevant information.
-    """
-    data = []
-    for log in logs:
-        try:
-            author, email, date, timezone = log.split("|")
-            commit_date = datetime.fromisoformat(date.strip())
-            entry = {
-                "author": author.strip(),
-                "date": commit_date,
-                "timezone": timezone.strip(),
-            }
-            if include_email:
-                entry["email"] = email.strip()
-            data.append(entry)
-        except ValueError:
-            continue  # Skip malformed logs
-    return pd.DataFrame(data)
-
-
-def analyze_timezones(df, threshold):
-    """
-    Analyze timezones and detect frequent changes.
-    """
-    group_cols = ["author"]
-    if "email" in df.columns:
-        group_cols.append("email")
-
-    grouped = df.groupby(group_cols)
-    analysis = []
-
-    for group_key, group in grouped:
-        group = group.sort_values("date")
-        timezones = group["timezone"].tolist()
-        unique_timezones = set(timezones)
-        timezone_changes = sum(
-            1 for i in range(1, len(timezones)) if timezones[i] != timezones[i - 1]
-        )
-
-        analysis_entry = {
-            "author": group_key[0],
-            "total_commits": len(group),
-            "unique_timezones": len(unique_timezones),
-            "timezone_changes": timezone_changes,
-            "suspicious": timezone_changes > threshold,
-        }
-        if "email" in df.columns:
-            analysis_entry["email"] = group_key[1]
-        analysis.append(analysis_entry)
-
-    return pd.DataFrame(analysis)
-
-
-def is_git_repository(path):
-    """
-    Check if the given path is a Git repository.
-    """
-    try:
-        subprocess.run(
-            ["git", "-C", path, "rev-parse"], check=True, capture_output=True, text=True
-        )
-        return True
-    except subprocess.CalledProcessError:
-        return False
-
-
-def clone_repo(remote_url):
-    """
-    Clone the remote Git repository into a temporary directory.
-    """
-    temp_dir = tempfile.mkdtemp()
-    subprocess.run(["git", "clone", remote_url, temp_dir], check=True)
-    return temp_dir
-
-
 def main(args):
     repo_path = None
     temp_dir = None
     try:
         if args.repo:
             print(f"Cloning remote repository: {args.repo}...")
-            repo_path = clone_repo(args.repo)
+            repo_path = dapi.clone_repo(args.repo)
         else:
             repo_path = os.getcwd()
-            if not is_git_repository(repo_path):
+            if not dapi.is_git_repository(repo_path):
                 raise ValueError(
                     f"The current directory '{repo_path}' is not a Git repository."
                 )
 
         print("Extracting Git logs...")
-        logs = extract_git_logs(repo_path)
+        logs = dapi.extract_git_logs(repo_path)
         print(f"{len(logs)} commits extracted.")
 
         print("Parsing logs...")
-        df = parse_logs(logs, include_email=not args.no_email)
+        df = dapi.parse_logs(logs, include_email=not args.no_email)
         if df.empty:
             print("No valid logs found.")
             return
@@ -187,7 +85,7 @@ def main(args):
         print(
             f"Analyzing timezones with a threshold of {args.threshold} timezone changes..."
         )
-        analysis = analyze_timezones(df, args.threshold)
+        analysis = dapi.analyze_timezones(df, args.threshold)
 
         if args.only_suspicious:
             analysis = analysis[analysis["suspicious"]]
