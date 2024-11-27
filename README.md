@@ -349,7 +349,7 @@ irregular timezone changes.
 Obviously, not all timezone changes are suspicious, many of them are legit,
 but like demonstrated by xz example some are real attempts. **JiaT75** tried
 to show that he was located in Asia where some timezone changes reflect
-western Europe timezone. Some timezone changes are so short that **JiaT75**
+Eastern Europe timezone. Some timezone changes are so short that **JiaT75**
 travel faster than light.
 
 **We should notice that it is now easy to understand the whole story after the
