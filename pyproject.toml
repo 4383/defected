@@ -10,7 +10,7 @@ name = "defected"
 authors = [
     {name = "Hervé Beraud", email = "herveberaud.pro@gmail.com"},
 ]
-description = "Design and run batch replacements."
+description = "Detect suspicious behaviors in git repos and open-source projects."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
