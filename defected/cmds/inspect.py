@@ -56,6 +56,11 @@ def add_arguments(parser):
     parser.add_argument(
         "--output", type=str, default="inspect_results.csv", help="Output file."
     )
+    parser.add_argument(
+        "--only-suspicious",
+        action="store_true",
+        help="Show and save only suspicious results (default: show all results).",
+    )
 
 
 def main(args):
@@ -131,6 +136,9 @@ def main(args):
         print("\nTimezone change log:")
         for _, change in timezone_changes_df.iterrows():
             suspicious_flag = " (SUSPICIOUS)" if change["suspicious"] else ""
+            if args.only_suspicious and not change["suspicious"]:
+                continue
+
             print(
                 f"From {change['previous_timezone']} at {change['previous_date']} "
                 f"to {change['current_timezone']} at {change['current_date']}{suspicious_flag}"
