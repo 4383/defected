@@ -223,7 +223,13 @@ Detailed results saved to 'inspect_results_usage.csv' and 'inspect_results_chang
 
 ## Real world use case
 
-[JiaT75](https://github.com/JiaT75) and the [xz Backdoor](https://en.wikipedia.org/wiki/XZ_Utils_backdoor)
+**Before starting investigationg this use case, we should notice that it is
+now easy to understand the whole story after the fact. In no case we want to
+incriminate anyone. We simply want to highligh such kind of social engineering
+to try to avoid similar scenario in the future.**
+
+[JiaT75](https://github.com/JiaT75) and the [xz Backdoor](
+https://en.wikipedia.org/wiki/XZ_Utils_backdoor)
 
 ### Background
 
@@ -297,22 +303,31 @@ From +0800 at 2022-07-01 21:19:26 to +0300 at 2022-07-25 18:20:01
 From +0300 at 2022-07-25 18:30:05 to +0800 at 2022-08-17 17:59:51
 From +0800 at 2022-09-02 20:18:55 to +0300 at 2022-09-08 15:07:00
 From +0300 at 2022-09-08 15:07:00 to +0800 at 2022-09-21 16:15:50
-From +0800 at 2022-10-06 17:00:38 to +0300 at 2022-10-06 21:53:09
+From +0800 at 2022-10-06 17:00:38 to +0300 at 2022-10-06 21:53:09 (SUSPICIOUS)
 From +0300 at 2022-10-06 21:53:09 to +0800 at 2022-10-23 21:01:08
 From +0800 at 2022-10-23 21:01:08 to +0200 at 2022-11-07 16:24:14
 From +0200 at 2022-11-07 16:24:14 to +0800 at 2022-11-19 23:18:04
 From +0800 at 2023-06-20 20:32:59 to +0300 at 2023-06-27 17:27:09
-From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32
+From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32 (SUSPICIOUS)
 From +0800 at 2024-02-09 23:59:54 to +0200 at 2024-02-12 17:09:10
-From +0200 at 2024-02-12 17:09:10 to +0800 at 2024-02-13 01:53:33
+From +0200 at 2024-02-12 17:09:10 to +0800 at 2024-02-13 01:53:33 (SUSPICIOUS)
 ```
 
-We can clearly observe that "Jia Tan" traveled at the speed of the light:
+We can clearly observe that "Jia Tan" traveled at the speed of the light,
+and the `inspect` command tagged this timezone change, and also two other,
+as suspicious activity:
+
 ```
-From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32
+From +0300 at 2023-06-27 17:27:09 to +0800 at 2023-06-27 23:38:32 (SUSPICIOUS)
 ```
 
 Moving from Eastern Europe to Asia in a snap of the fingers.
+If we do the same for Lasse or Jonathan (the other persons tagged as
+suspicious) in our primary analyze, Jonathan have no suspicious time change
+when we run the `inspect` command, and Lasse only have one suspicious time
+from Asia to Central Europe, but [Lasse is the creator of xz](
+https://github.com/tukaani-project/xz/graphs/contributors) so we can be more
+confident concerning him and his activity.
 
 
 ### Interpretation
@@ -351,10 +366,6 @@ but like demonstrated by xz example some are real attempts. **JiaT75** tried
 to show that he was located in Asia where some timezone changes reflect
 Eastern Europe timezone. Some timezone changes are so short that **JiaT75**
 travel faster than light.
-
-**We should notice that it is now easy to understand the whole story after the
-fact. We don't want to incriminate anyone. We simply want to highligh such
-kind of social engineering to try to avoid in the future.**
 
 ## How It Works
 

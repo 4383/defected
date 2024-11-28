@@ -111,3 +111,41 @@ def clone_repo(remote_url):
     temp_dir = tempfile.mkdtemp()
     subprocess.run(["git", "clone", remote_url, temp_dir], check=True)
     return temp_dir
+
+
+def calculate_suspicious_changes(df, time_threshold, distance_threshold):
+    """
+    Analyze timezone changes and mark suspicious patterns.
+
+    Args:
+        df (pd.DataFrame): DataFrame containing timezone change data.
+        time_threshold (int): Maximum allowed hours between timezone changes.
+        distance_threshold (int): Maximum allowed timezone offset difference.
+
+    Returns:
+        pd.DataFrame: DataFrame with an additional 'suspicious' column.
+    """
+    # Ensure datetime columns are properly converted
+    df["previous_date"] = pd.to_datetime(df["previous_date"])
+    df["current_date"] = pd.to_datetime(df["current_date"])
+
+    # Calculate time difference between changes (in hours)
+    df["time_difference"] = (
+        df["current_date"] - df["previous_date"]
+    ).dt.total_seconds() / 3600
+
+    # Calculate timezone offset differences
+    df["timezone_difference"] = df.apply(
+        lambda row: abs(int(row["current_timezone"]) - int(row["previous_timezone"]))
+        / 100,
+        axis=1,
+    )
+
+    # Mark changes as suspicious based on thresholds
+    df["suspicious"] = (
+        df["time_difference"] <= time_threshold
+    ) & (  # Time between changes is too short
+        df["timezone_difference"] >= distance_threshold
+    )  # Distance between timezones is too large
+
+    return df

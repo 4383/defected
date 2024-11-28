@@ -42,6 +42,18 @@ def add_arguments(parser):
         "--threshold", type=int, default=2, help="Threshold for timezone changes."
     )
     parser.add_argument(
+        "--max-threshold",
+        type=int,
+        default=24,
+        help="Maximum allowed hours between timezone changes to be seen as suspicious.",
+    )
+    parser.add_argument(
+        "--max-distance",
+        type=int,
+        default=5,
+        help="Maximum allowed timezone offset difference.",
+    )
+    parser.add_argument(
         "--output", type=str, default="inspect_results.csv", help="Output file."
     )
 
@@ -104,20 +116,29 @@ def main(args):
                 )
             previous_row = row
 
+        timezone_changes_df = pd.DataFrame(timezone_changes)
+
+        # Calculate suspicious changes
+        if not timezone_changes_df.empty:
+            timezone_changes_df = dapi.calculate_suspicious_changes(
+                timezone_changes_df, args.max_threshold, args.max_distance
+            )
+
         # Display results
         print("\nTimezone usage:")
         print(timezone_usage)
 
         print("\nTimezone change log:")
-        for change in timezone_changes:
+        for _, change in timezone_changes_df.iterrows():
+            suspicious_flag = " (SUSPICIOUS)" if change["suspicious"] else ""
             print(
                 f"From {change['previous_timezone']} at {change['previous_date']} "
-                f"to {change['current_timezone']} at {change['current_date']}"
+                f"to {change['current_timezone']} at {change['current_date']}{suspicious_flag}"
             )
 
         # Save results to CSV
         timezone_usage.to_csv(args.output.replace(".csv", "_usage.csv"), index=False)
-        pd.DataFrame(timezone_changes).to_csv(
+        timezone_changes_df.to_csv(
             args.output.replace(".csv", "_changes.csv"), index=False
         )
         print(
