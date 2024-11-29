@@ -68,12 +68,8 @@ Here is an example of terminal output:
     From +0300 at 2024-06-27 17:27:09 to +0800 at 2024-06-27 23:38:32 (SUSPICIOUS)
     From +0200 at 2024-02-12 17:09:10 to +0800 at 2024-02-13 01:53:33 (SUSPICIOUS)
 
-If you want to go further in your investigation you can take
-a look to our cold cases to see the patterns revealed in real
-attacks:
+Now that you have filtered your data you might be interested by
+:ref:`The Investigate Command` that can give more meaning to the
+results you get by using the ``inspect`` command.
 
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   ../examples/investigations/*
+.. include:: ../cold-case-banner.rst
