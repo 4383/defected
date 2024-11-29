@@ -76,4 +76,4 @@ attacks:
    :maxdepth: 1
    :glob:
 
-   examples/investigations/*
+   ../examples/investigations/*
