@@ -93,3 +93,5 @@ Or CSV output:
 
 If you want to go further in your investigation
 we invite you take a look at the :ref:`The Inspect Command`.
+
+.. include:: ../cold-case-banner.rst
