@@ -134,14 +134,31 @@ def main(args):
         print(timezone_usage)
 
         print("\nTimezone change log:")
+        suspicious_change_count = 0
         for _, change in timezone_changes_df.iterrows():
-            suspicious_flag = " (SUSPICIOUS)" if change["suspicious"] else ""
+            suspicious_flag = ""
+            if change["suspicious"]:
+                suspicious_flag = " (SUSPICIOUS)"
+                suspicious_change_count += 1
             if args.only_suspicious and not change["suspicious"]:
                 continue
 
             print(
                 f"From {change['previous_timezone']} at {change['previous_date']} "
                 f"to {change['current_timezone']} at {change['current_date']}{suspicious_flag}"
+            )
+
+        if suspicious_change_count == 0:
+            print(
+                f"No timezone changes as been found as suspicious given the "
+                f"defined max threshold ({args.max_threshold}) and the max distance "
+                f"({args.max_distance})."
+            )
+        else:
+            print(
+                f"{suspicious_change_count} suspicious timezone changes have been identified "
+                f"as suspectful given the defined max threshold ({args.max_threshold}) "
+                f"and the max distance ({args.max_distance})."
             )
 
         # Save results to CSV
