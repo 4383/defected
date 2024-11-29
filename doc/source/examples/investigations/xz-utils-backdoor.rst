@@ -5,8 +5,9 @@ The XZ Utils backdoor
 
 .. warning::
     **Before starting investigating this cold case, we should notice that
-    it is now easy to understand the whole story after the fact.
-    In no case we want to incriminate anyone. We simply want to highligh
+    it is now easy to understand the whole story after the fact. We do not
+    want to be perceived as patronizing or as moralizers. In no case we
+    want to incriminate anyone. We simply want to highligh
     such kind of social engineering to try to limit as far as possible
     similar scenarios in the future.**
 
