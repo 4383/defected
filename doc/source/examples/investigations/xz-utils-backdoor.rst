@@ -284,3 +284,9 @@ timezone changes reflect Eastern Europe timezone.
 
 That's like a cold case where a small oversights can reveal
 significant details.
+
+Do not lose time and start securing your projects:
+
+.. code-block::
+
+    $ pip install defected
