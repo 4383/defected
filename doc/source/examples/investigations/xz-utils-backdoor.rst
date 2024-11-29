@@ -11,7 +11,7 @@ The XZ Utils backdoor
     such kind of social engineering to try to limit as far as possible
     similar scenarios in the future.**
 
-    Lasse Colin and Jonathan Nieder are persons mentioned in this example
+    Lasse Collin and Jonathan Nieder are persons mentioned in this example
     but they are not any time responsible of anything or badly intentioned.
     They are just mentioned in this example because their name bubbled
     up at the beginning of the investigation due to some false alarm,
