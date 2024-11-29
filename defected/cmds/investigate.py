@@ -316,8 +316,8 @@ def main(args):
                 "countries_previous": ", ".join(countries_previous),
                 "current_timezone": current_tz,
                 "countries_current": ", ".join(countries_current),
-                "departure": f"{previous_date} {previous_tz} (time at is {time_in_current_at_change} {current_tz})",
-                "arrival": f"{current_date} {current_tz} (time at is {time_in_previous_after_change} {previous_tz})",
+                "departure": f"{previous_date} {previous_tz} (estimated time at arrival: {time_in_current_at_change} {current_tz})",
+                "arrival": f"{current_date} {current_tz} (estimated time at departure: {time_in_previous_after_change} {previous_tz})",
                 "physically_possible": travel_feasibility,
             }
         )
