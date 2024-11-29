@@ -86,10 +86,11 @@ Defected addresses these challenges by:
    - Flags contributors exceeding a configurable threshold of timezone
      changes.
 4. **Reveal Deception**:
-   - Find fraudulous activity and unveil bad intentions.
-4. **Customizable Options**:
+   - Find fraudulous activity and unveil bad intentions ([example](
+     https://defected.readthedocs.io/en/latest/examples/investigations/xz-utils-backdoor.html)).
+5. **Customizable Options**:
    - Adjust thresholds, filter suspicious results.
-5. **Exportable Reports**:
+6. **Exportable Reports**:
    - Saves results in CSV format for further analysis.
 
 ## Contributing
