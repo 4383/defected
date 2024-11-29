@@ -1,8 +1,8 @@
 Commands Overview
 =================
 
-Defected is composed of a main command `defected` that give
-you access to sub-commands.
+Defected is composed of a main command named ``defected``
+that give you access to various sub-commands.
 
 You can display all the available sub-commands by using:
 

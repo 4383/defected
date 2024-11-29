@@ -3,7 +3,7 @@
 The Inspect Command
 ===================
 
-The `inspect` command allow to investigate more deeply
+The ``inspect`` command allow to investigate more deeply
 on a specific contributor profile that have been potentially
 considered as suspicious by the ``analyze`` command (
 :ref:`The Analyze Command`).

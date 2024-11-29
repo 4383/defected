@@ -3,7 +3,7 @@
 The Analyze Command
 ===================
 
-The `analyze` command give you a quick overview of
+The ``analyze`` command give you a quick overview of
 contributors profiles that can be potentially considered
 as suspicious.
 

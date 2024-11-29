@@ -19,7 +19,7 @@ The XZ Utils backdoor
     have been proven as badly intentioned.
 
     We didn't investigated further about other results and so we
-    consider false alarm.
+    consider them as false alarm.
 
 In this example we describe the story of `JiaT75
 <https://github.com/JiaT75>`_ (Jia Tan), a core contributor of the
@@ -111,7 +111,7 @@ Results are exported at the CSV format and can be loaded in sheet:
      - True
      - jrnieder@gmail.com
 
-The `analyze` command identified 3 contributors profils that
+The ``analyze`` command identified 3 contributors profils that
 are potentially suspicious due to timezone changes.
 
 .. note::
@@ -157,9 +157,9 @@ about Jia Tan by running the following command:
     From +0800 at 2024-02-09 23:59:54 to +0200 at 2024-02-12 17:09:10
     From +0200 at 2024-02-12 17:09:10 to +0800 at 2024-02-13 01:53:33 (SUSPICIOUS)
 
-We can observe that some timezone changes are tagged as `SUSPICIOUS`.
+We can observe that some timezone changes are tagged as ``SUSPICIOUS``.
 Jia Tan seems to have traveled at the speed of the light,
-and the `inspect` command tagged these timezone change, example:
+and the ``inspect`` command tagged these timezone change, example:
 
 .. code-block::
 
@@ -169,7 +169,7 @@ Jia Tan moved from Eastern Europe to Asia in a snap of the fingers.
 
 If we do the same for Lasse or Jonathan (the other persons tagged as
 suspicious) in our primary analyze, Jonathan have no suspicious time
-change when we run the `inspect` command, and Lasse only have one
+change when we run the ``inspect`` command, and Lasse only have one
 suspicious time from Asia to Central Europe, but `Lasse is the creator
 of xz <https://github.com/tukaani-project/xz/graphs/contributors>`_ so
 we can be more confident concerning him and his activity.
