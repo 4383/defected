@@ -81,12 +81,15 @@ with the highest `CVSS
 <https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System>`_ score
 (10.0) is discovered.
 
-We can run a post-mortem investigation against these real cold cases with
-defected to see if it reveal something that the well know stories already
+Can we use Defected to run a post-mortem investigation against these real cold
+cases to see if it reveal something that the well know stories already
 revealed us?
 
 Take a look to our :ref:`cold cases investigations <Cold Cases Examples>`
 made with defected on real life use cases of cyberattacks.
+
+You want to propose a new cold case investigation, please to let us know by
+`contacting us <herveberaud.pro@gmail.com>`_ .
 
 What are the signs of a bad actor activity?
 -------------------------------------------
