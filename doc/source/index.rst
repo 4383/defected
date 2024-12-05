@@ -72,6 +72,22 @@ used in coordination to investigate a specific scenario.
 
 Please find more details about the :ref:`available commands <Commands>`.
 
+Real Use Cases Examples
+-----------------------
+
+Each 3 months a new `CVE
+<https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures>`_
+with the highest `CVSS
+<https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System>`_ score
+(10.0) is discovered.
+
+We can run a post-mortem investigation against these real cold cases with
+defected to see if it reveal something that the well know stories already
+revealed us?
+
+Take a look to our :ref:`cold cases investigations <Cold Cases Examples>`
+made with defected on real life use cases of cyberattacks.
+
 What are the signs of a bad actor activity?
 -------------------------------------------
 
@@ -148,22 +164,6 @@ countries, etc.
 
 Defected raise your awarness and allow you better protect the project
 you cherish.
-
-Real Use Cases Examples
------------------------
-
-Each 3 months a new `CVE
-<https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures>`_
-with the highest `CVSS
-<https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System>`_ score
-(10.0) is discovered.
-
-We can run a post-mortem investigation against these real cold cases with
-defected to see if it reveal something that the well know stories already
-revealed us?
-
-Take a look to our :ref:`cold cases investigations <Cold Cases Examples>`
-made with defected on real life use cases of cyberattacks.
 
 Source Code & Package
 ---------------------
