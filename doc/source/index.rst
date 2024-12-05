@@ -150,15 +150,18 @@ Real Use Cases Examples
 
 Each 3 months a new `CVE
 <https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures>`_
-with the highest `CVSS <https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System>`_ score (10.0) is discovered.
+with the highest `CVSS
+<https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System>`_ score
+(10.0) is discovered.
 
-We can run a post-mortem investigation with defected to see if it
-reveal something that the well know stories already revealed us?
+We can run a post-mortem investigation against these real cold cases with
+defected to see if it reveal something that the well know stories already
+revealed us?
 
-Here are investigation made with defected on real use cases:
+Here are cold cases investigations made with defected on real use cases:
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-   examples/investigations/*
+   examples/cold-cases-investigations/*
