@@ -131,11 +131,11 @@ defected’s Solution
 
 We implemented defected with the following statement in mind:
 
-> If contributor timezone move weirdly then that could indicate
-> that this user is trying to hide is activity and his identity.
-> If a user show timezone changes that are not logic or physically
-> possible then that could indicate something weird and we should be
-> more careful with the changes proposed by that contributor.
+*If contributor timezone move weirdly then that could indicate
+that this user is trying to hide is activity and his identity.
+If a user show timezone changes that are not logic or physically
+possible then that could indicate something weird and we should be
+more careful with the changes proposed by that contributor.*
 
 Defected addresses these challenges by automating git log analyze.
 Defected automatically extract these weird patterns and give you
