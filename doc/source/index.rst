@@ -83,10 +83,10 @@ with the highest `CVSS
 
 Can we use Defected to run a post-mortem investigation against these real cold
 cases to see if it reveal something that the well know stories already
-revealed us?
+revealed us? The answer is yes.
 
-Take a look to our :ref:`cold cases investigations <Cold Cases Examples>`
-made with defected on real life use cases of cyberattacks.
+Take a look to our :ref:`cold cases investigations <Cold Cases Examples>` on
+real cyber attacks cases and observe what ``defected`` reveal.
 
 You want to propose a new cold case investigation, please to let us know by
 `contacting us <herveberaud.pro@gmail.com>`_ .
