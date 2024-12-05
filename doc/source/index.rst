@@ -168,8 +168,8 @@ made with defected on real life use cases of cyberattacks.
 Source Code & Package
 ---------------------
 
-Defected's `source code <https://github.com/4383/defected>`_ is available on
+`Defected's source code <https://github.com/4383/defected>`_ is available on
 the github repository of the project.
 
-Official `package of defected <https://pypi.org/project/defected/>`_ can be
-found on pypi.
+`Defected's official package <https://pypi.org/project/defected/>`_ is
+available on `PyPi <https://pypi.org>`_.
