@@ -3,6 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _Home Page:
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   commands/overview.rst
+   examples/investigations/cold-cases.rst
+
+
 defected documentation
 ======================
 
@@ -60,13 +70,7 @@ Usage
 Defected comes with various commands. Those commands can be
 used in coordination to investigate a specific scenario.
 
-Please find more details about the available commands:
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   commands/*
+Please find more details about the :ref:`available commands <Commands>`.
 
 What are the signs of a bad actor activity?
 -------------------------------------------
@@ -158,10 +162,14 @@ We can run a post-mortem investigation against these real cold cases with
 defected to see if it reveal something that the well know stories already
 revealed us?
 
-Here are cold cases investigations made with defected on real use cases:
+Take a look to our :ref:`cold cases investigations <Cold Cases Examples>`
+made with defected on real life use cases of cyberattacks.
 
-.. toctree::
-   :maxdepth: 1
-   :glob:
+Source Code & Package
+---------------------
 
-   examples/cold-cases-investigations/*
+Defected's `source code <https://github.com/4383/defected>`_ is available on
+the github repository of the project.
+
+Official `package of defected <https://pypi.org/project/defected/>`_ can be
+found on pypi.

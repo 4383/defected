@@ -1,3 +1,5 @@
+.. _Commands:
+
 Commands Overview
 =================
 
@@ -18,3 +20,4 @@ Please find below the documentation of available sub-commands:
 
    ./analyze.rst
    ./inspect.rst
+   ./investigate.rst

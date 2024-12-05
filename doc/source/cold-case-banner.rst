@@ -8,4 +8,4 @@
        :maxdepth: 1
        :glob:
 
-       ../examples/cold-cases-investigations/*
+       ../examples/investigations/cold-cases/*
