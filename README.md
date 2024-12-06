@@ -87,7 +87,7 @@ Defected addresses these challenges by:
      changes.
 4. **Reveal Deception**:
    - Find fraudulous activity and unveil bad intentions ([example](
-     https://defected.readthedocs.io/en/latest/examples/investigations/xz-utils-backdoor.html)).
+     https://defected.readthedocs.io/en/latest/examples/investigations/cold-cases/xz-utils-backdoor.html)).
 5. **Customizable Options**:
    - Adjust thresholds, filter suspicious results.
 6. **Exportable Reports**:
